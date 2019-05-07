@@ -17,10 +17,14 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
 from . import views as core_views
+from . import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^login/$', auth_views.login, {'template_name': 'Login.html'}),
     url(r'^logout/$', auth_views.logout, name='logout'),
-    url(r'^signup/$', core_views.signup)
+    url(r'^signup/$', core_views.signup),
+    url(r'^$', views.index, name='index'),
+    url(r'^(?P<room_name>[^/]+)/$', views.room, name='room'),
+
 ]

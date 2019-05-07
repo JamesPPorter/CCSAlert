@@ -1,6 +1,8 @@
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
+from django.utils.safestring import mark_safe
+import json
 
 def signup(request):
     if request.method == 'POST':
@@ -14,3 +16,10 @@ def signup(request):
     else:
         form = UserCreationForm()
     return render(request, 'SignUp.html', {'form': form})
+def index(request):
+    return render(request, 'chat/index.html', {})
+
+def room(request, room_name):
+    return render(request, 'chat/room.html', {
+        'room_name_json': mark_safe(json.dumps(room_name))
+    })
